@@ -288,12 +288,14 @@ class TIG_PostNL_Block_Adminhtml_Sales_Order_Shipment_Create_ShipmentOptions ext
             $postnlOrder->getDeliveryDate(),
             new DateTimeZone('UTC')
         );
-        $deliveryDate->setTimezone(new DateTimeZone('Europe/Amsterdam'));
+        
+        if ($deliveryDate) {
+            $deliveryDate->setTimezone(new DateTimeZone('Europe/Amsterdam'));
 
-        if ($deliveryDate->format('N') === '0' || $deliveryDate->format('N') === '1') {
-            return false;
+            if ($deliveryDate->format('N') === '0' || $deliveryDate->format('N') === '1') {
+                return false;
+            }
         }
-
         return true;
     }
 
